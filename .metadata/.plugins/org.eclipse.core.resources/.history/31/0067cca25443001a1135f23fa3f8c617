@@ -1,0 +1,88 @@
+package vaar10;
+
+public class Date {
+
+	private int day, month, year;
+	
+	public Date(int day, int month, int year) {
+		check(day, month, year);
+		this.day = day;
+		this.month = month;
+		this.year = year;
+	}
+	
+	private boolean isLeapYear(int year) {
+		return (year % 4 == 0 && (year % 400 == 0 || year % 100 != 0));
+	}
+	
+	private int numberOfDays(int month, int year) {
+		switch (month) {
+		case 1: case 3: case 5: case 7: case 8: case 10: case 12: return 31;
+		case 4: case 6: case 9: case 11: return 30;
+		case 2: return (isLeapYear(year) ? 29 : 28);
+		}
+		return -1;
+	}
+	
+	private void check(int day, int month, int year) {
+		if (day < 1 || day > numberOfDays(month, year)) {
+			throw new IllegalArgumentException("day is illegal:" + day);
+		}
+		if (month < 1 || month > 12) {
+			throw new IllegalArgumentException("Month is illegal:" + month);
+		}
+	}
+	
+	public int getDay() {
+		return day;
+	}
+	
+	public void setDay(int day) {
+		check(day, month, year);
+		this.day = day;
+	}
+	
+	public int getMonth() {
+		return month;
+	}
+	
+	public void setMonth(int month) {
+		check(day, month, year);
+		this.month = month;
+	}
+	
+	public int getYear() {
+		return year;
+	}
+	
+	public void setYear(int year) {
+		check(day, month, year);
+		this.year = year;
+	}
+	
+	public static void main(String[] args) {
+		Date d = new Date(3,4,1991);
+		
+		System.out.println(d.getDay());
+		System.out.println(d.getMonth());
+		System.out.println(d.getYear());
+		System.out.println(d.isLeapYear(d.getYear()));
+		System.out.println("im satisfied with this");
+	}
+	 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
